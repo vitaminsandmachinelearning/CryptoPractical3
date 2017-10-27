@@ -24,35 +24,23 @@ public class CryptoPractical3 {
         "02285af8f969dc5c7b12be72fbce858997afe80a",
         "57864da96344366865dd7cade69467d811a7961b"
     };
-
     static String[] passwords = new String[hashes.length];
+    static int count = 0;
     
     static char[] charset = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
         'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     static int charmax = 6;
     
-    static DateFormat df = new SimpleDateFormat("HH:mm:ss");
-    static Date current = new Date();
-    static double[] times = new double[hashes.length];
-    static double starttime;
+    static long[] times = new long[hashes.length];
+    static long starttime = System.currentTimeMillis();
     
     public static void main(String[] args) throws NoSuchAlgorithmException 
     {
-        df.format(current);
-        starttime = current.getTime();
-        
-        df.format(current);
-        current.getTime();
-        for(int i = 0; i < hashes.length; i++)
+        for(int i = 1; i < charmax + 1; i++)
         {
-            passwords[i] = bruteforce(sha1(hashes[i]));
-            if(i != 0)
-                times[i] = current.getTime() - times[i - 1];
-            else
-                times[i] = current.getTime() - starttime;
-            System.out.println(String.format("SHA1: %s Password: %s Cracked in: %f", hashes[i], passwords[i], times[i]));
-        }      
+            bruteforce(charset, charset.length, i, "");
+        }
     }
     static String sha1(String password) throws NoSuchAlgorithmException
     {
@@ -63,33 +51,31 @@ public class CryptoPractical3 {
             toReturn += Integer.toString((bytes[i]&0xff) + 0x100, 16).substring(1);
         return toReturn;
     }
-    static String bruteforce(String hash) throws NoSuchAlgorithmException
-    {
-        ArrayList<String> passwords = new ArrayList<>();
-        passwords.add("");
-        for(int i = 1; i < charmax + 1; i++)
-        {
-            getallstrings(charset, charset.length, i, "", passwords);
-            for(String s : passwords)
-            {
-                if(sha1(s).equals(hash))
-                    return s;
-            }
-        }
-        return "";
-    }
-    static void getallstrings(char[] set, int n, int length, String p, ArrayList<String> passwords)
+
+    static void bruteforce(char[] set, int n, int length, String p) throws NoSuchAlgorithmException
     {
         if(length == 0)
         {
-            passwords.add(p);
+            checkhash(p);
             return;
         }
         for(int i = 0; i < n; i++)
         {
             String np = p + set[i];
-            getallstrings(set, n, length - 1, np, passwords);
+            bruteforce(set, n, length - 1, np);
         }
-        
     }
-}
+    static void checkhash(String p) throws NoSuchAlgorithmException
+    {
+        String pw = p;
+        p = sha1(p);
+        for(int i = 0; i < hashes.length; i++)
+            if(p.equals(hashes[i]))
+            {
+                times[i] = System.currentTimeMillis() - starttime;
+                passwords[i] = pw;
+                System.out.println(String.format("SHA1: %s Password: '%s' Cracked in: %dms", hashes[i], passwords[i], times[i]));
+                count++;
+            }
+    }
+}   
