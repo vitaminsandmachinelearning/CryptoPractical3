@@ -1,3 +1,4 @@
+Test order:
 SHA1: c2543fff3bfa6f144c2f06a7de6cd10c0b650cae Password: 'this' Cracked in: 1849ms
 SHA1: b47f363e2b430c0647f14deea3eced9b0ef300ce Password: 'is' Cracked in: 8ms
 SHA1: e74295bfc2ed0b52d40073e8ebad555100df1380 Password: 'very' Cracked in: 2012ms
@@ -10,3 +11,17 @@ SHA1: 21e7133508c40bbdf2be8a7bdc35b7de0b618ae4 Password: '00if00' Cracked in: 29
 SHA1: 6ef80072f39071d4118a6e7890e209d4dd07e504 Password: 'cannot' Cracked in: 328857ms
 SHA1: 02285af8f969dc5c7b12be72fbce858997afe80a Password: '4this4' Cracked in: 3346702ms
 SHA1: 57864da96344366865dd7cade69467d811a7961b Password: '6will' Cracked in: 100970ms
+
+Completed order:
+SHA1: b47f363e2b430c0647f14deea3eced9b0ef300ce Password: 'is' Cracked in: 8ms
+SHA1: c2543fff3bfa6f144c2f06a7de6cd10c0b650cae Password: 'this' Cracked in: 1849ms
+SHA1: e74295bfc2ed0b52d40073e8ebad555100df1380 Password: 'very' Cracked in: 2012ms
+SHA1: 77cfc481d3e76b543daf39e7f9bf86be2e664959 Password: 'fail7' Cracked in: 17975ms
+SHA1: 7302ba343c5ef19004df7489794a0adaee68d285 Password: '1you1' Cracked in: 86409ms
+SHA1: 5cc48a1da13ad8cef1f5fad70ead8362aabc68a1 Password: '5you5' Cracked in: 98193ms
+SHA1: 57864da96344366865dd7cade69467d811a7961b Password: '6will' Cracked in: 100970ms
+SHA1: 6ef80072f39071d4118a6e7890e209d4dd07e504 Password: 'cannot' Cracked in: 328857ms
+SHA1: 0f7d0d088b6ea936fb25b477722d734706fe8b40 Password: 'simple' Cracked in: 2043778ms
+SHA1: 21e7133508c40bbdf2be8a7bdc35b7de0b618ae4 Password: '00if00' Cracked in: 2944917ms
+SHA1: 4bcc3a95bdd9a11b28883290b03086e82af90212 Password: '3crack' Cracked in: 3191596ms
+SHA1: 02285af8f969dc5c7b12be72fbce858997afe80a Password: '4this4' Cracked in: 3346702ms
