@@ -18,7 +18,10 @@ public class CryptoPractical3 {
         "6ef80072f39071d4118a6e7890e209d4dd07e504",
         "02285af8f969dc5c7b12be72fbce858997afe80a",
         "57864da96344366865dd7cade69467d811a7961b"
-    };
+    };/*
+    static String[] hashes = {
+        "b858cb282617fb0956d960215c8e84d1ccf909c6"
+    };*/
     static String[] passwords = new String[hashes.length];
     static int count = 0;
     
@@ -34,7 +37,7 @@ public class CryptoPractical3 {
     {
         for(int i = 1; i < charmax + 1; i++)
         {
-            bruteforce(charset, charset.length, i, "");
+            nextString(charset, charset.length, i, "");
         }
     }
     static String sha1(String password) throws NoSuchAlgorithmException
@@ -47,20 +50,20 @@ public class CryptoPractical3 {
         return toReturn;
     }
 
-    static void bruteforce(char[] set, int n, int length, String p) throws NoSuchAlgorithmException
+    static void nextString(char[] set, int n, int length, String p) throws NoSuchAlgorithmException
     {
         if(length == 0)
         {
-            checkhash(p);
+            checkHash(p);
             return;
         }
         for(int i = 0; i < n; i++)
         {
             String np = p + set[i];
-            bruteforce(set, n, length - 1, np);
+            nextString(set, n, length - 1, np);
         }
     }
-    static void checkhash(String p) throws NoSuchAlgorithmException
+    static void checkHash(String p) throws NoSuchAlgorithmException
     {
         String pw = p;
         p = sha1(p);
