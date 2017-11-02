@@ -18,10 +18,7 @@ public class CryptoPractical3 {
         "6ef80072f39071d4118a6e7890e209d4dd07e504",
         "02285af8f969dc5c7b12be72fbce858997afe80a",
         "57864da96344366865dd7cade69467d811a7961b"
-    };/*
-    static String[] hashes = {
-        "b858cb282617fb0956d960215c8e84d1ccf909c6"
-    };*/
+    };
     static String[] passwords = new String[hashes.length];
     static int count = 0;
     
