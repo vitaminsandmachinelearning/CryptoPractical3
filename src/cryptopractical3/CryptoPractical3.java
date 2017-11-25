@@ -4,7 +4,7 @@ package cryptopractical3;
 import java.security.*;
 
 public class CryptoPractical3 {
-
+    //the list of hashes to be cracked
     static String[] hashes = {
         "c2543fff3bfa6f144c2f06a7de6cd10c0b650cae",
         "b47f363e2b430c0647f14deea3eced9b0ef300ce",
@@ -19,6 +19,7 @@ public class CryptoPractical3 {
         "02285af8f969dc5c7b12be72fbce858997afe80a",
         "57864da96344366865dd7cade69467d811a7961b"
     };
+    //store plaintexts of passwords that have been cracked
     static String[] passwords = new String[hashes.length];
     static int count = 0;
     
@@ -26,12 +27,13 @@ public class CryptoPractical3 {
         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
         'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     static int charmax = 6;
-    
+    //store the amount of time taken for each password to be cracked
     static long[] times = new long[hashes.length];
     static long starttime = System.currentTimeMillis();
     
     public static void main(String[] args) throws NoSuchAlgorithmException 
     {
+        //loop through every character combination using charset 
         for(int i = 1; i < charmax + 1; i++)
         {
             nextString(charset, charset.length, i, "");
@@ -43,29 +45,30 @@ public class CryptoPractical3 {
         byte[] bytes = md.digest(password.getBytes());
         String toReturn = "";
         for(int i = 0; i < bytes.length; i++)
-            toReturn += Integer.toString((bytes[i]&0xff) + 0x100, 16).substring(1);
+            toReturn += Integer.toString((bytes[i]&0xff) + 0x100, 16).substring(1); //output to string as hex instead of decimal 
         return toReturn;
     }
 
-    static void nextString(char[] set, int n, int length, String p) throws NoSuchAlgorithmException
+    static void nextString(char[] set, int n, int length, String variant) throws NoSuchAlgorithmException
     {
-        if(length == 0)
+        if(length == 0) //once length is 0, a final string of a set length has been generated
         {
-            checkHash(p);
-            return;
+            checkHash(variant); //call the check hash function on the passed string
+            return; //whether the hash was found or not, this function is no longer needed so return 
         }
+        //recursively call this function to find every combination of characters from a set
         for(int i = 0; i < n; i++)
         {
-            String np = p + set[i];
-            nextString(set, n, length - 1, np);
+            String newvariant = variant + set[i]; //append next character in charset to passed string parameter
+            nextString(set, n, length - 1, newvariant); //call this function using a length of - 1 and using the new string
         }
     }
     static void checkHash(String p) throws NoSuchAlgorithmException
     {
         String pw = p;
-        p = sha1(p);
-        for(int i = 0; i < hashes.length; i++)
-            if(p.equals(hashes[i]))
+        p = sha1(p); //hash the passed plaintext string
+        for(int i = 0; i < hashes.length; i++) //check each hash in the hashes array
+            if(p.equals(hashes[i])) //if a hash matches record the plaintext and timestamp then output it to the user
             {
                 times[i] = System.currentTimeMillis() - starttime;
                 passwords[i] = pw;
